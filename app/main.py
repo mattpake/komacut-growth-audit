@@ -26,7 +26,7 @@ _audit_cache: dict | None = None
 
 @app.get("/", response_class=HTMLResponse)
 async def index(request: Request):
-    return _templates.TemplateResponse("index.html", {"request": request})
+    return _templates.TemplateResponse(request, "index.html")
 
 
 @app.get("/health")
