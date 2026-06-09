@@ -11,14 +11,14 @@ _cache: dict | None = None
 
 def _pct(series: pd.Series) -> pd.Series:
     """'3.45%' -> 0.0345, already float passthrough."""
-    if series.dtype == object:
+    if pd.api.types.is_string_dtype(series):
         return series.str.rstrip("%").astype(float) / 100
     return series
 
 
 def _money(series: pd.Series) -> pd.Series:
     """'$1.23' or '1.23' -> float."""
-    if series.dtype == object:
+    if pd.api.types.is_string_dtype(series):
         return series.str.replace("[$,]", "", regex=True).astype(float)
     return series
 
