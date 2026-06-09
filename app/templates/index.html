@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Komacut Growth Audit</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
   <style>
     [x-cloak] { display: none !important; }
@@ -339,9 +340,21 @@
               </div>
             </template>
             <template x-for="(msg, i) in chatMessages" :key="i">
-              <div :class="msg.role === 'user' ? 'flex justify-end' : 'flex justify-start'">
-                <div :class="msg.role === 'user' ? 'bg-indigo-600 text-white' : 'bg-white border text-gray-800'"
-                  class="max-w-lg px-4 py-2.5 rounded-xl text-sm shadow-sm whitespace-pre-wrap" x-text="msg.content"></div>
+              <div class="flex justify-start">
+                <div class="flex items-start gap-2 max-w-2xl w-full">
+                  <div class="shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold mt-0.5"
+                    :class="msg.role === 'user' ? 'bg-indigo-100 text-indigo-700' : 'bg-gray-100 text-gray-600'"
+                    x-text="msg.role === 'user' ? 'You' : 'AI'"></div>
+                  <div class="flex-1 text-sm">
+                    <template x-if="msg.role === 'user'">
+                      <div class="bg-indigo-50 border border-indigo-100 text-gray-800 px-3 py-2 rounded-xl" x-text="msg.content"></div>
+                    </template>
+                    <template x-if="msg.role === 'assistant'">
+                      <div class="bg-white border text-gray-800 px-3 py-2 rounded-xl prose prose-sm max-w-none"
+                        x-html="marked.parse(msg.content)"></div>
+                    </template>
+                  </div>
+                </div>
               </div>
             </template>
             <template x-if="chatLoading">
