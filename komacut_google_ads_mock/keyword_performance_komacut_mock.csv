@@ -1,0 +1,36 @@
+Campaign,Ad group,Keyword,Match type,Status,Impr.,Clicks,CTR,Avg. CPC,Cost,Conversions,Conv. rate,Cost / conv.,Conv. value,ROAS,Currency
+Search - Laser Cutting Services - US/CA,Laser Cutting Services,laser cutting service,Phrase,Enabled,4200,240,5.71%,6.36,1526.4,14,5.83%,109.03,6300.0,4.13,USD
+Search - Laser Cutting Services - US/CA,Laser Cutting Services,laser cutting services,Exact,Enabled,3100,190,6.13%,5.75,1092.5,13,6.84%,84.04,5850.0,5.35,USD
+Search - Laser Cutting Services - US/CA,Laser Cutting Services,laser cutting service metal,Phrase,Enabled,950,57,6.00%,6.28,357.96,5,8.77%,71.59,2250.0,6.29,USD
+Search - Laser Cutting Services - US/CA,Laser Cutting Services,metal laser cutting service,Phrase,Enabled,880,45,5.11%,5.95,267.75,3,6.67%,89.25,1350.0,5.04,USD
+Search - Laser Cutting Services - US/CA,Laser Cutting Services,laser cut metal parts,Phrase,Enabled,1500,66,4.40%,7.1,468.6,4,6.06%,117.15,1800.0,3.84,USD
+Search - Laser Cutting Services - US/CA,Low Intent Laser Cutting,laser cutting files,Broad,Enabled,2600,110,4.23%,3.2,352.0,0,0.00%,,0.0,0.0,USD
+Search - Laser Cutting Services - US/CA,Low Intent Laser Cutting,laser cutting machine,Broad,Enabled,2200,90,4.09%,4.1,369.0,0,0.00%,,0.0,0.0,USD
+Search - Sheet Metal Fabrication - US/CA,Sheet Metal Fabrication,online sheet metal fabrication,Phrase,Enabled,1200,58,4.83%,6.8,394.4,5,8.62%,78.88,2250.0,5.7,USD
+Search - Sheet Metal Fabrication - US/CA,Sheet Metal Fabrication,custom sheet metal parts,Exact,Enabled,980,51,5.20%,6.25,318.75,6,11.76%,53.13,2700.0,8.47,USD
+Search - Sheet Metal Fabrication - US/CA,Sheet Metal Fabrication,sheet metal fabrication online quote,Phrase,Enabled,760,44,5.79%,7.4,325.6,4,9.09%,81.4,1800.0,5.53,USD
+Search - Sheet Metal Fabrication - US/CA,Sheet Metal Fabrication,sheet metal bending service,Phrase,Enabled,1400,49,3.50%,5.3,259.7,2,4.08%,129.85,900.0,3.47,USD
+Search - Sheet Metal Fabrication - US/CA,Sheet Metal Design,sheet metal design,Broad,Enabled,3900,125,3.21%,2.1,262.5,1,0.80%,262.5,450.0,1.71,USD
+Search - Sheet Metal Fabrication - US/CA,Sheet Metal Design,sheet metal drawing,Broad,Enabled,2800,96,3.43%,1.8,172.8,0,0.00%,,0.0,0.0,USD
+Search - CNC Machining Online Quote,CNC Online Quote,cnc machining quote,Phrase,Enabled,1600,64,4.00%,8.2,524.8,3,4.69%,174.93,1350.0,2.57,USD
+Search - CNC Machining Online Quote,CNC Online Quote,cnc machining online quote,Exact,Enabled,1100,61,5.55%,9.1,555.1,6,9.84%,92.52,2700.0,4.86,USD
+Search - CNC Machining Online Quote,CNC Parts,cnc machining part,Phrase,Enabled,2200,70,3.18%,6.25,437.5,2,2.86%,218.75,900.0,2.06,USD
+Search - CNC Machining Online Quote,CNC Parts,custom cnc parts,Phrase,Enabled,1800,81,4.50%,7.3,591.3,5,6.17%,118.26,2250.0,3.81,USD
+Search - CNC Machining Online Quote,CNC Educational,what is cnc machining,Broad,Enabled,3600,112,3.11%,2.4,268.8,0,0.00%,,0.0,0.0,USD
+Search - CNC Machining Online Quote,CNC Educational,cnc machining course,Broad,Enabled,1700,60,3.53%,3.1,186.0,0,0.00%,,0.0,0.0,USD
+Search - Custom Metal Parts,Custom Metal Parts,custom metal parts,Phrase,Enabled,2100,105,5.00%,5.6,588.0,8,7.62%,73.5,3600.0,6.12,USD
+Search - Custom Metal Parts,Custom Metal Parts,custom aluminum parts,Phrase,Enabled,1700,68,4.00%,5.8,394.4,4,5.88%,98.6,1800.0,4.56,USD
+Search - Custom Metal Parts,Custom Metal Parts,metal fabrication online quote,Phrase,Enabled,1300,66,5.08%,6.9,455.4,5,7.58%,91.08,2250.0,4.94,USD
+Search - Custom Metal Parts,Custom Metal Parts,custom sheet metal enclosure,Phrase,Enabled,900,36,4.00%,7.7,277.2,3,8.33%,92.4,1350.0,4.87,USD
+Search - Prototype to Production,Prototype Manufacturing,sheet metal prototype,Phrase,Enabled,1500,51,3.40%,5.1,260.1,2,3.92%,130.05,900.0,3.46,USD
+Search - Prototype to Production,Prototype Manufacturing,prototype metal parts,Phrase,Enabled,1100,41,3.73%,5.6,229.6,1,2.44%,229.6,450.0,1.96,USD
+Search - Prototype to Production,Production Manufacturing,prototype to production manufacturing,Phrase,Enabled,800,20,2.50%,6.2,124.0,1,5.00%,124.0,450.0,3.63,USD
+Search - Prototype to Production,Low Intent Prototype,prototype template,Broad,Enabled,1800,60,3.33%,2.2,132.0,0,0.00%,,0.0,0.0,USD
+Search - Contract Manufacturing China/Mexico,Contract Manufacturing,china contract manufacturer,Phrase,Enabled,1600,40,2.50%,9.2,368.0,1,2.50%,368.0,600.0,1.63,USD
+Search - Contract Manufacturing China/Mexico,Contract Manufacturing,turnkey contract manufacturing,Phrase,Enabled,1300,32,2.46%,10.4,332.8,2,6.25%,166.4,1200.0,3.61,USD
+Search - Contract Manufacturing China/Mexico,Contract Manufacturing,canadian owned manufacturer in china,Phrase,Enabled,600,30,5.00%,8.6,258.0,3,10.00%,86.0,1800.0,6.98,USD
+Search - Contract Manufacturing China/Mexico,Contract Manufacturing,mexico sheet metal manufacturing,Phrase,Enabled,900,28,3.11%,8.9,249.2,0,0.00%,,0.0,0.0,USD
+Search - Competitor Terms - Xometry/Protolabs,Xometry Alternatives,xometry alternative,Phrase,Enabled,1400,92,6.57%,9.8,901.6,3,3.26%,300.53,1800.0,2.0,USD
+Search - Competitor Terms - Xometry/Protolabs,Xometry Alternatives,xometry laser cutting,Phrase,Enabled,1300,86,6.62%,10.1,868.6,2,2.33%,434.3,1200.0,1.38,USD
+Search - Competitor Terms - Xometry/Protolabs,Protolabs Alternatives,protolabs alternative,Phrase,Enabled,1000,64,6.40%,9.3,595.2,2,3.13%,297.6,1200.0,2.02,USD
+Search - Competitor Terms - Xometry/Protolabs,Protolabs Alternatives,protolabs cnc machining,Phrase,Enabled,900,50,5.56%,9.7,485.0,0,0.00%,,0.0,0.0,USD

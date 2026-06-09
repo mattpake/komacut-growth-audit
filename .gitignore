@@ -13,9 +13,9 @@ wheels/
 .env
 
 # Data files with potentially sensitive info
-*.xlsx
 *.zip
 
 # OS
 .DS_Store
 Thumbs.db
+MVP_Specification__Komacut_AI_PPC_+_SEO_Growth_Audit_Demo.docx

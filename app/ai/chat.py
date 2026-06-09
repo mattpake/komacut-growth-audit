@@ -43,7 +43,7 @@ def reply(message: str, audit: dict) -> str:
 
     response = client.messages.create(
         model="claude-sonnet-4-6",
-        max_tokens=1024,
+        max_tokens=16000,
         system=system,
         messages=[{"role": "user", "content": message}],
     )
