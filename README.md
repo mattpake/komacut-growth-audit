@@ -21,7 +21,7 @@ AI-powered PPC + SEO audit demo for Komacut (online laser cutting, sheet metal f
 
 ```bash
 # 1. Clone and enter the project
-git clone <repo-url>
+git clone https://github.com/mattpake/komacut-growth-audit.git
 cd komacut-growth-audit
 
 # 2. Copy env file and add your API key
