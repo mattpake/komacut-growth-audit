@@ -316,6 +316,13 @@
 
         <!-- Chat Tab -->
         <div x-show="tab==='chat'" class="p-5 flex flex-col h-[520px]">
+          <div class="flex justify-between items-center mb-3">
+            <span class="text-xs text-gray-400" x-text="chatMessages.length ? chatMessages.length / 2 + ' exchange(s)' : 'No messages yet'"></span>
+            <button @click="chatMessages = []" x-show="chatMessages.length > 0"
+              class="text-xs text-gray-400 hover:text-red-500 border border-gray-200 hover:border-red-300 px-2 py-1 rounded">
+              + New Chat
+            </button>
+          </div>
           <div class="flex-1 overflow-y-auto space-y-3 mb-4" id="chat-messages">
             <template x-if="chatMessages.length === 0">
               <div class="text-center py-12 text-gray-400">
