@@ -12,6 +12,9 @@ wheels/
 # Environment variables
 .env
 
+# Ubersuggest OAuth token (contains access token — never commit)
+.ubersuggest_token.json
+
 # Data files with potentially sensitive info
 *.zip
 

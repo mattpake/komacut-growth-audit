@@ -2,8 +2,12 @@ from __future__ import annotations
 import json
 import os
 import anthropic
+from app.auth import ubersuggest_oauth as ub_oauth
 
 _client: anthropic.Anthropic | None = None
+
+_UBERSUGGEST_MCP_URL = "https://ubersuggest-mcp.neilpatelapi.com/mcp"
+_UBERSUGGEST_MCP_NAME = "ubersuggest"
 
 SYSTEM_PROMPT = """You are a B2B growth consultant specialising in PPC and SEO for custom manufacturing companies.
 You will receive audit findings for Komacut (online laser cutting, sheet metal fabrication, CNC machining — US/Canada market).
@@ -35,6 +39,18 @@ def _get_client() -> anthropic.Anthropic:
             raise ValueError("ANTHROPIC_API_KEY environment variable not set")
         _client = anthropic.Anthropic(api_key=api_key)
     return _client
+
+
+def _mcp_server() -> dict:
+    server: dict = {
+        "type": "url",
+        "url": _UBERSUGGEST_MCP_URL,
+        "name": _UBERSUGGEST_MCP_NAME,
+    }
+    token = ub_oauth.get_token() or os.environ.get("UBERSUGGEST_API_KEY")
+    if token:
+        server["authorization_token"] = token
+    return server
 
 
 def _build_context(ppc: dict, seo: dict) -> str:
@@ -79,15 +95,31 @@ def generate(ppc: dict, seo: dict) -> list[dict]:
     client = _get_client()
     context = _build_context(ppc, seo)
 
-    message = client.messages.create(
-        model="claude-sonnet-4-6",
-        max_tokens=4096,
-        system=SYSTEM_PROMPT,
-        messages=[{"role": "user", "content": context}],
-    )
+    ubersuggest_token = ub_oauth.get_token() or os.environ.get("UBERSUGGEST_API_KEY")
 
-    raw = message.content[0].text.strip()
-    # Strip markdown code fences if present
+    if ubersuggest_token:
+        message = client.beta.messages.create(
+            model="claude-sonnet-4-6",
+            max_tokens=4096,
+            system=SYSTEM_PROMPT,
+            messages=[{"role": "user", "content": context}],
+            mcp_servers=[_mcp_server()],
+            tools=[{"type": "mcp_toolset", "mcp_server_name": _UBERSUGGEST_MCP_NAME}],
+            betas=["mcp-client-2025-11-20"],
+        )
+        text_block = next(
+            (block for block in message.content if block.type == "text"), None
+        )
+        raw = (text_block.text if text_block else "").strip()
+    else:
+        message = client.messages.create(
+            model="claude-sonnet-4-6",
+            max_tokens=4096,
+            system=SYSTEM_PROMPT,
+            messages=[{"role": "user", "content": context}],
+        )
+        raw = message.content[0].text.strip()
+
     if raw.startswith("```"):
         raw = raw.split("\n", 1)[1]
         raw = raw.rsplit("```", 1)[0]

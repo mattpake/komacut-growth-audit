@@ -2,12 +2,17 @@ from __future__ import annotations
 import json
 import os
 import anthropic
+from app.auth import ubersuggest_oauth as ub_oauth
 
 _client: anthropic.Anthropic | None = None
+
+_UBERSUGGEST_MCP_URL = "https://ubersuggest-mcp.neilpatelapi.com/mcp"
+_UBERSUGGEST_MCP_NAME = "ubersuggest"
 
 SYSTEM_TEMPLATE = """You are a B2B growth consultant for Komacut (online laser cutting, sheet metal fabrication, CNC machining — US/Canada market).
 You have just completed a PPC and SEO audit. Answer the user's question concisely and specifically, referencing actual data from the audit findings below.
 Be direct, actionable, and avoid filler. Use bullet points when listing items.
+You have access to Ubersuggest SEO tools — use them when the user asks about keyword research, search volumes, competition, or content ideas.
 
 AUDIT FINDINGS SUMMARY:
 {context}"""
@@ -23,6 +28,18 @@ def _get_client() -> anthropic.Anthropic:
     return _client
 
 
+def _mcp_server() -> dict:
+    server: dict = {
+        "type": "url",
+        "url": _UBERSUGGEST_MCP_URL,
+        "name": _UBERSUGGEST_MCP_NAME,
+    }
+    token = ub_oauth.get_token() or os.environ.get("UBERSUGGEST_API_KEY")
+    if token:
+        server["authorization_token"] = token
+    return server
+
+
 def _build_context(audit: dict) -> str:
     ppc = audit["ppc"]
     seo = audit["seo"]
@@ -36,15 +53,35 @@ SEO quick wins: {', '.join(r['Keywords'] + ' (#' + str(r['Position']) + ')' for 
 Top competitor gaps: {', '.join(r['Keyword'] for r in seo['competitor_gaps'][:5])}"""
 
 
-def reply(message: str, audit: dict) -> str:
+def reply(message: str, audit: dict, history: list[dict] | None = None) -> str:
     client = _get_client()
     context = _build_context(audit)
     system = SYSTEM_TEMPLATE.format(context=context)
 
-    response = client.messages.create(
-        model="claude-sonnet-4-6",
-        max_tokens=16000,
-        system=system,
-        messages=[{"role": "user", "content": message}],
-    )
-    return response.content[0].text
+    # Build full message list: prior turns + current user message
+    messages = list(history or []) + [{"role": "user", "content": message}]
+
+    ubersuggest_token = ub_oauth.get_token() or os.environ.get("UBERSUGGEST_API_KEY")
+
+    if ubersuggest_token:
+        response = client.beta.messages.create(
+            model="claude-sonnet-4-6",
+            max_tokens=16000,
+            system=system,
+            messages=messages,
+            mcp_servers=[_mcp_server()],
+            tools=[{"type": "mcp_toolset", "mcp_server_name": _UBERSUGGEST_MCP_NAME}],
+            betas=["mcp-client-2025-11-20"],
+        )
+        text_block = next(
+            (block for block in response.content if block.type == "text"), None
+        )
+        return text_block.text if text_block else ""
+    else:
+        response = client.messages.create(
+            model="claude-sonnet-4-6",
+            max_tokens=16000,
+            system=system,
+            messages=messages,
+        )
+        return response.content[0].text
