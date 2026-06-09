@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 
 from app.data import loader
 from app.audit import ppc, seo
+from app.ai import recommendations as rec_engine
 
 load_dotenv()
 
@@ -36,5 +37,18 @@ async def audit_run():
         seo_findings = seo.run(data)
         _audit_cache = {"ppc": ppc_findings, "seo": seo_findings}
         return _audit_cache
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/audit/recommendations")
+async def audit_recommendations():
+    if _audit_cache is None:
+        raise HTTPException(status_code=400, detail="Run /audit/run first")
+    try:
+        recs = rec_engine.generate(_audit_cache["ppc"], _audit_cache["seo"])
+        return {"recommendations": recs}
+    except ValueError as e:
+        raise HTTPException(status_code=503, detail=str(e))
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
