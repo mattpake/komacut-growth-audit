@@ -6,7 +6,12 @@ from dotenv import load_dotenv
 
 from app.data import loader
 from app.audit import ppc, seo
-from app.ai import recommendations as rec_engine
+from app.ai import recommendations as rec_engine, chat as chat_engine
+from pydantic import BaseModel
+
+
+class ChatRequest(BaseModel):
+    message: str
 
 load_dotenv()
 
@@ -48,6 +53,19 @@ async def audit_recommendations():
     try:
         recs = rec_engine.generate(_audit_cache["ppc"], _audit_cache["seo"])
         return {"recommendations": recs}
+    except ValueError as e:
+        raise HTTPException(status_code=503, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/chat")
+async def chat(req: ChatRequest):
+    if _audit_cache is None:
+        raise HTTPException(status_code=400, detail="Run /audit/run first")
+    try:
+        answer = chat_engine.reply(req.message, _audit_cache)
+        return {"reply": answer}
     except ValueError as e:
         raise HTTPException(status_code=503, detail=str(e))
     except Exception as e:
